@@ -106,7 +106,7 @@ To make it work without rebooting, run
 
 `iptables -P FORWARD ACCEPT` and `iptables –-table nat -A POSTROUTING -o eth0 -j MASQUERADE`
 
-# DHCP server
+### DHCP server
 
 Good, now we can install the DHCP server.
  
