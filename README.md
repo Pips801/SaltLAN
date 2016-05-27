@@ -6,13 +6,13 @@ Single-server LAN party
 
 Alright, I've wanted to write this down for a while. SaltLAN is a self-contained LAN party, featuring Routing, DHCP, DNS, Game servers and game download caching.
 
-I wanted to build SaltLAN after attending a LAN party in May, 2016. While the LAN was a lot of fun and it featured a great giveaway, awesome unlmited drinks and cool people, however, there were some massive networking problems.
+I wanted to build SaltLAN after attending a LAN party in May, 2016. While the LAN was a lot of fun and it featured a great giveaway, awesome unlimited drinks and cool people, however, there were some massive networking problems.
 
- 1. No dedicated LAN servers for games like TF2. People had to try and host local games, but noby could see/connect to the game.
- 2. Bad switches/using home routers instead of an unmanaged switch with distrobution switches. Nobody could talk to eachother.
- 3. Slow internet (20Mbps max). Not everybody had certan games, and the day of the LAN, there was a massive TF2 update. It killed the network several times.
+ 1. No dedicated LAN servers for games like TF2. People had to try and host local games, but nobody could see/connect to the game.
+ 2. Bad switches/using home routers instead of an unmanaged switch with distribution switches. Nobody could talk to each other.
+ 3. Slow internet (20Mbps max). Not everybody had certain games, and the day of the LAN, there was a massive TF2 update. It killed the network several times.
  
- After talking to some people in the freenode/#DC801 chanel about building a portable LAN party, I was ready to start.
+ After talking to some people in the freenode/#DC801 channel about building a portable LAN party, I was ready to start.
  
 ## pre-rec
 
@@ -59,7 +59,7 @@ We need to configure the NICs now. add these lines so the file looks like this. 
 
 
 ```
-# WAN - to wall
+# WAN - to internet
 auto eth0
 iface eth0 dhcp
 
@@ -67,7 +67,7 @@ iface eth0 dhcp
 auto eth1
 iface eth1 inet static
     address 10.0.0.1 # address the router will be on the LAN
-    netmask 255.255.255.0 # netmask for the network. You can change this if you know what yo're doing.
+    netmask 255.255.255.0 # netmask for the network. You can change this if you know what you’re doing.
     network 10.0.0.0 # base address for the network
     broadcast 10.0.0.255 # broadcast address
 ```
@@ -112,21 +112,21 @@ Good, now we can install the DHCP server.
  
  `apt-get install isc-dhcp-server`
  
- Now we need to configure the DHCP server. Later on we will be using the steamcache-dns docker image as our DNS server.
+ Now we need to configure the DHCP server. Later on we'll be using the steamcache-dns docker image as our DNS server, so "option domain-name-servers" might not make sense currently.
  
  `nano /etc/dhcp/dhcpd.conf`
  
  then configure it to look like this
  
 ```
-# set the dns server to our internal server (docker dns server)
+# set the dns server to our BIND DNS (docker steamcache-dns)
 option domain-name-servers 10.0.0.1 ;
 
 default-lease-time 3600;
 max-lease-time 7200;
 ddns-update-style none;
 
-# set up the DHCP configuration. Change this if you know networking.
+# set up the DHCP configuration. Currently skips the first 9 assignable addresses, for our workstations.
 subnet 10.0.0.0 netmask 255.255.255.0 {
   range 10.0.0.10 10.0.0.254;
   option subnet-mask 255.255.255.0;
@@ -135,7 +135,7 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
 }
 ```
 
-Now we want to set it to run the DHC server **only** on the LAN (not the WAN)
+Now we want to set it to run the DHCP server **only** on the LAN (not the WAN)
 
 `nano /etc/default/isc-dhcp-server`
 
