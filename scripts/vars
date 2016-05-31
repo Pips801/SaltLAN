@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#names of containers
+STEAMCACHE=steamcache
+LANCACHE=lancache
+DNS=steamcache-dns
+
+#interfaces
+WAN_INTERFACE=enp4s0f0
+LAN_INTERFACE=enp4s0f1
+STEAMCACHE_INTERFACE=enp4s0f1
+LANCACHE_INTERFACE=enp4s0f1:0
+
+#ip addresses
+HOST_IP=10.0.01
+DNS_IP=10.0.0.1
+STEAMCACHE_IP=10.0.0.1
+LANCACHE_IP=10.0.0.2
