@@ -1,0 +1,59 @@
+
+clear
+
+echo "  ____        _ _   _        _    _   _ "
+echo " / ___|  __ _| | |_| |      / \  | \ | |"
+echo " \___ \ / _ \`| | __| |     / _ \ |  \| |"
+echo "  ___) | (_| | | |_| |___ / ___ \| |\  |"
+echo " |____/ \__,_|_|\__|_____/_/   \_\_| \_|"
+echo "                                        "
+echo "          @Pips801 & @Glitchvid         "
+echo "                                        "
+echo "Prepping system..."
+
+. ./vars
+
+# kill whatever is running on the dns port
+fuser -k 53/udp >/dev/null
+
+# bring up the interface for the lancache
+ifup $LANCACHE_INTERFACE >/dev/null
+
+echo "Checking Ethernet speeds..."
+
+echo "WAN speeds:"
+ethtool $WAN_INTERFACE | grep -i speed
+
+echo "LAN speeds:"
+ethtool $LAN_INTERFACE | grep -i speed
+
+echo "Starting steamcache..."
+
+docker start $STEAMCACHE >/dev/null
+
+echo "Starting lancache..."
+
+docker start $LANCACHE >/dev/null
+
+echo "Starting steamcache-dns..."
+
+docker start $DNS >/dev/null
+
+echo "Starting tmux sessions for logs..."
+
+tmux new -d -s steamcache "docker exec $STEAMCACHE sh watchlog.sh"
+tmux new -d -s lancache "docker exec $LANCACHE tail -f /data/logs/access.log"
+tmux new -d -s docker-stats 'docker stats $(docker ps --format={{.Names}})'
+tmux join-pane -s lancache -t steamcache -p 66
+tmux join-pane -s docker-stats -t steamcache -p 20
+
+tmux new -d -s iftop-lan "iftop -i $LAN_INTERFACE"
+tmux new -d -s iftop-wan "iftop -i $WAN_INTERFACE"
+tmux join-pane -s iftop-wan -t iftop-lan
+
+tmux new -d -s iotop 'iotop'
+tmux new -d -s htop 'htop'
+tmux join-pane -s iotop -t htop
+
+echo "Running, you can now open log files."
+
