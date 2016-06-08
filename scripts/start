@@ -1,26 +1,28 @@
+
 #!/bin/bash
 
 clear
 
-echo "  ____        _ _   _        _    _   _ "
-echo " / ___|  __ _| | |_| |      / \  | \ | |"
-echo " \___ \ / _ \`| | __| |     / _ \ |  \| |"
-echo "  ___) | (_| | | |_| |___ / ___ \| |\  |"
-echo " |____/ \__,_|_|\__|_____/_/   \_\_| \_|"
-echo "                                        "
-echo "          @Pips801 & @Glitchvid         "
-echo "                                        "
-echo "Prepping system..."
-
 . ./vars
 
-# kill whatever is running on the dns port
+echo "Stopping running process on port 53/udp..."
 fuser -k 53/udp >/dev/null
 
-# bring up the interface for the lancache
-ifup $LANCACHE_INTERFACE >/dev/null
+echo "Bringing up interfaces..."
+ifup $STEAMCACHE_INTERFACE >/dev/null
+ifup $BLIZZARDCACHE_INTERFACE >/dev/null
+ifup $FRONTIERCACHE_INTERFACE >/dev/null
+ifup $ORIGINCACHE_INTERFACE >/dev/null
+ifup $RIOTCACHE_INTERFACE >/dev/null
+ifup $UPLAYCACHE_INTERFACE >/dev/null
+ifup $WINDOWSCACHE_INTERFACE >/dev/null
 
+
+echo "Forcing network adapters to 1000Mb/s..."
+ethtool -s $WAN_INTERFACE speed 1000 duplex full autoneg off
+ethtool -s $LAN_INTERFACE speed 1000 duplex full autoneg off
 echo "Checking Ethernet speeds..."
+sleep 5
 
 echo "WAN speeds:"
 ethtool $WAN_INTERFACE | grep -i speed
@@ -28,22 +30,43 @@ ethtool $WAN_INTERFACE | grep -i speed
 echo "LAN speeds:"
 ethtool $LAN_INTERFACE | grep -i speed
 
-echo "Starting steamcache..."
+echo "Starting Steam cache..."
 
 docker start $STEAMCACHE >/dev/null
 
-echo "Starting lancache..."
+echo "Starting Blizzard cache..."
 
-docker start $LANCACHE >/dev/null
+docker start $BLIZZARDCACHE >/dev/null
 
-echo "Starting steamcache-dns..."
+echo "Starting Frontier cache..."
+
+docker start $FRONTIERCACHE >/dev/null
+
+echo "Starting Origin cache..."
+
+docker start $ORIGINCACHE >/dev/null
+
+echo "Starting Riot cache..."
+
+docker start $RIOTCACHE >/dev/null
+
+echo "Starting Uplay cache..."
+
+docker start $UPLAYCACHE >/dev/null
+
+echo "Starting Windows Update cache..."
+
+docker start $WINDOWSCACHE >/dev/null
+
+echo "Starting DNS server..."
 
 docker start $DNS >/dev/null
 
 echo "Starting tmux sessions for logs..."
 
+
 tmux new -d -s steamcache "docker exec $STEAMCACHE sh watchlog.sh"
-tmux new -d -s lancache "docker exec $LANCACHE tail -f /data/logs/access.log"
+tmux new -d -s lancache "docker exec $LANCACHE tail -f /data/logs/access.log | lolcat -p 100 -F 0.005"
 tmux new -d -s docker-stats 'docker stats $(docker ps --format={{.Names}})'
 tmux join-pane -s lancache -t steamcache -p 66
 tmux join-pane -s docker-stats -t steamcache -p 20
@@ -57,4 +80,3 @@ tmux new -d -s htop 'htop'
 tmux join-pane -s iotop -t htop
 
 echo "Running, you can now open log files."
-
