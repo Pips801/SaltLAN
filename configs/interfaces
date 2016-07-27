@@ -1,17 +1,21 @@
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
+#  ____        _ _   _        _    _   _
+# / ___|  __ _| | |_| |      / \  | \ | |
+# \___ \ / _` | | __| |     / _ \ |  \| |
+#  ___) | (_| | | |_| |___ / ___ \| |\  |
+# |____/ \__,_|_|\__|_____/_/   \_\_| \_|
 
 source /etc/network/interfaces.d/*
 
-# The loopback network interface
+# loopback
 auto lo
 iface lo inet loopback
 
-# The primary network interface
+# WAN - has hotplug and dhcp to work on "any" network
 allow-hotplug enp4s0f0
 auto enp4s0f0
 iface enp4s0f0 inet dhcp
 
+# LAN
 allow-hotplug enp4s0f1
 auto enp4s0f1
 iface enp4s0f1 inet static
@@ -19,6 +23,8 @@ iface enp4s0f1 inet static
         netmask 255.255.255.0
         network 10.0.0.0
         broadcast 10.0.0.255
+
+# Caches
 
 # Steam
 auto enp4s0f1:2
