@@ -37,3 +37,45 @@ iface enp4s0f1:4 inet static
 auto enp4s0f1:5
 iface enp4s0f1:5 inet static
         address 10.0.0.5
+        
+# Game servers
+
+# csgo
+auto enp4s0f1:10
+iface enp4s0f1:10 inet static
+        address 10.0.0.10
+
+# tf2
+auto enp4s0f1:11
+iface enp4s0f1:11 inet static
+        address 10.0.0.11
+        
+# ut3
+auto enp4s0f1:12
+iface enp4s0f1:12 inet static
+        address 10.0.0.12
+        
+# insurgency
+auto enp4s0f1:13
+iface enp4s0f1:13 inet static
+        address 10.0.0.13
+        
+# ss3
+auto enp4s0f1:14
+iface enp4s0f1:14 inet static
+        address 10.0.0.14
+        
+# chiv
+auto enp4s0f1:15
+iface enp4s0f1:15 inet static
+        address 10.0.0.15
+        
+# starbound
+auto enp4s0f1:16
+iface enp4s0f1:16 inet static
+        address 10.0.0.16
+        
+# ts
+auto enp4s0f1:17
+iface enp4s0f1:17 inet static
+        address 10.0.0.17
