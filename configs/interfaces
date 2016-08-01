@@ -83,7 +83,7 @@ auto enp4s0f1:16
 iface enp4s0f1:16 inet static
         address 10.0.0.16
         
-# ts
+# factorio
 auto enp4s0f1:17
 iface enp4s0f1:17 inet static
         address 10.0.0.17
