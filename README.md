@@ -23,7 +23,7 @@ Component | Hardware
 **RAM** |32GB DDR4      
 **Storage** | 512GB Samsung EVO SSD
   | 3TB WD BLACK HDD
-**Networking**| 3 1Gbps NICS
+**Networking**| 3x 1Gbps NICS
   | 1x 1Gbps NIC for WAN
   | 2x 1Gbps NICs bonded for 2Gbps into LAN
   
@@ -32,9 +32,17 @@ Component | Hardware
 Component | Hardware
 --- | ---
 **Core switch** | 1x Cisco SLM 2048 48 port Gigabit switch
-**Disribution switches** | Netgear Prosafe 24 port 10/100 switch with 2x 1Gbps uplink
+**Disribution switches** | 6+x Netgear Prosafe 24 port 10/100 switch with 2x 1Gbps uplink
 
-##Software
- | 
- --- | ---
- test | test
+###Software
+
+
+OS: Ubuntu server 16.04
+
+DHCP: dnsmasq
+
+DNS: dnsmasq
+
+Caching: Docker
+
+
