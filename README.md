@@ -45,9 +45,4 @@ DNS: dnsmasq
 
 Caching: Docker
 
-
-
-
-
-
-
+![Network Map](https://i.imgur.com/rzKoPNd.png)
