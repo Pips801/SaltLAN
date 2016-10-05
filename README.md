@@ -45,4 +45,30 @@ DNS: dnsmasq
 
 Caching: Docker
 
+##Address definition
+
+IP Address | Hostname | Port | Service | Comments
+:--- | --- | --- | :--- |--- | 
+`10.0.0.1` | `router.saltlan.org` | N/A | Router | Basic NAT and IPv4 forwarding
+`10.0.0.1` | `dns.saltlan.org` | `53` | Dnsmasq | DNS
+`10.0.0.1` | `dhcp.saltlan.org` | N/A | Dnsmasq | DHCP
+`10.0.0.2` | `steam.cache.saltlan.org` | `80->80` | Docker | Steam cache
+`10.0.0.3` | `blizzard.cache.saltlan.org` | `80->80` | Docker | Battle.net cache
+`10.0.0.4` | `origin.cache.saltlan.org` | `80->80` | Docker | Origin cache
+`10.0.0.5` | `uplay.cache.saltlan.org` | `80->80` | Docker | Uplay cache
+`10.0.0.6 - 9` | Reserved | N/A | N/A | N/A
+`10.0.0.10` | `csgo.server.saltlan.org` | `27015` | LGSM | CS:GO server
+`10.0.0.11` | `tf2.server.saltlan.org` | `27015` | LGSM | TF2 server
+`10.0.0.12` | `ut3.server.saltlan.org` | `27015` | LGSM | Unreal Tournament 2 server
+`10.0.0.13` | `insurgency.server.saltlan.org` | `27015` | LGSM | Insurgency server
+`10.0.0.14` | `ss3.server.saltlan.org` | `27015` | LGSM | Serious Sam 3 server
+`10.0.0.15` | `chiv.server.saltlan.org` | `27015` | LGSM | Chivalry server
+`10.0.0.16` | `starbound.server.saltlan.org` | `27015` | LGSM | Starbound server
+`10.0.0.17` | `factorio.server.saltlan.org` | `27015` | LGSM | Factorio server
+`10.0.0.18 - 19` | Reserved | N/A | N/A | N/A 
+`10.0.0.20 - 250` | DHCP Range | N/A | N/A | N/A
+`10.0.0.251 - 254` | Reserved | N/A | N/A | N/A
+`10.0.0.255` | Broadcast | N/A | N/A | N/A
+##Netmap
+
 ![Network Map](https://i.imgur.com/8V0OGwn.png)
