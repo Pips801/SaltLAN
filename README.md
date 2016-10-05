@@ -54,10 +54,10 @@ IP Address | Hostname | Port | Interface | Service | Comments
 `10.0.0.1` | `router.saltlan.org` | N/A | `eno2` | Router | Basic NAT and IPv4 forwarding
 `10.0.0.1` | `dns.saltlan.org` | `53` | `eno2` | Dnsmasq | DNS
 `10.0.0.1` | `dhcp.saltlan.org` | N/A | `eno2` | Dnsmasq | DHCP
-`10.0.0.2` | `steam.cache.saltlan.org` | `80->80` | `eno2:2` |  Docker | Steam cache
-`10.0.0.3` | `blizzard.cache.saltlan.org` | `80->80` |  `eno3` |  Docker | Battle.net cache
-`10.0.0.4` | `origin.cache.saltlan.org` | `80->80` | `eno2:4` |  Docker | Origin cache
-`10.0.0.5` | `uplay.cache.saltlan.org` | `80->80` |  `eno2:5` | Docker | Uplay cache
+`10.0.0.2` | `steam.cache.saltlan.org` | `80` | `eno2:2` |  Docker | Steam cache
+`10.0.0.3` | `blizzard.cache.saltlan.org` | `80` |  `eno3` |  Docker | Battle.net cache
+`10.0.0.4` | `origin.cache.saltlan.org` | `80` | `eno2:4` |  Docker | Origin cache
+`10.0.0.5` | `uplay.cache.saltlan.org` | `80` |  `eno2:5` | Docker | Uplay cache
 `10.0.0.6 - 9` | Reserved | N/A | N/A | N/A
 `10.0.0.10` | `csgo.server.saltlan.org` | `27015` | `eno2:10` |  LGSM | CS:GO server
 `10.0.0.11` | `tf2.server.saltlan.org` | `27015` | `eno2:11` |  LGSM | TF2 server
