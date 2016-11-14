@@ -17,6 +17,12 @@ I wanted to build SaltLAN after attending a LAN party in May, 2016. While the LA
 
 ###Server
 
+//side note:
+For anyone who's wondering why I'm releasing **so** much information on the setup and the possibility that this information might lead to a breach of network security:
+ 1. I am moderately confident in our network security and IDS.
+ 2. ALL of the network information is readily available to anyone who runs a basic nmap scan at the event.
+ 3. I want this information to be public. I spent a lot of time piecing pieces of information together from tons of sites and I want it to be available to anybody who looks.
+
 Component | Hardware
 --- | ---
 **CPU** |Xeon E3 1220v5 
