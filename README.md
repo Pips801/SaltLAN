@@ -69,7 +69,8 @@ IP Address | Hostname | Port | Interface | Service | Comments
 `10.0.0.17` | `factorio.server.saltlan.org` | `27015` | `eno2:17` |  LGSM | Factorio server
 `10.0.0.18 - 19` | Reserved | N/A | N/A | N/A | N/A 
 `10.0.0.20 - 250` | DHCP Range | N/A | N/A | N/A | N/A 
-`10.0.0.251 - 254` | Reserved | N/A | N/A | N/A | N/A 
+`10.0.0.251 - 253` | Reserved | N/A | N/A | N/A | N/A 
+`10.0.0.254` | `core.network.saltlan.org` | `80/443` | N/A | Cisco | SLM2048 core switch
 `10.0.0.255` | Broadcast | N/A | N/A | N/A | N/A 
 ##Netmap
 
